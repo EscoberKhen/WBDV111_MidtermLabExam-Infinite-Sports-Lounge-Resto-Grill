@@ -48,7 +48,6 @@ p {
     box-shadow: 0 2px 16px rgba(0,0,0,0.45);
     backdrop-filter: blur(2px);
 }
-/* subtle dark overlay so text stays readable over any bg image */
 .navbar::before {
     content: '';
     position: absolute;
@@ -258,6 +257,81 @@ section {
     padding: 12px 16px;
     font-weight: bold;
     text-align: center;
+}
+.gmail-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s;
+}
+.gmail-btn:hover {
+  background: #f5f5f5;
+  border-color: #D6BA73;
+}
+.gcal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  margin-top: 4px;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s;
+}
+.gcal-btn:hover {
+  background: #f0f7ff;
+  border-color: #4285F4;
+}
+.divider-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 16px;
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  color: #aaa;
+}
+.divider-line::before,
+.divider-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+.already-account {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  color: #666;
+  margin-top: 12px;
+}
+.already-account a {
+  color: #D6BA73;
+  text-decoration: none;
+  font-weight: 600;
+}
+.already-account a:hover {
+  text-decoration: underline;
 }
 footer {
     background: #000000;
@@ -601,4 +675,144 @@ footer {
   .menu-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+.reserve-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+.reserve-option {
+  cursor: pointer;
+}
+.reserve-option input[type="checkbox"] {
+  display: none;
+}
+.reserve-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 8px;
+  background: #fafafa;
+  transition: border-color 0.18s, background 0.18s;
+  text-align: center;
+}
+.reserve-option input[type="checkbox"]:checked + .reserve-card {
+  border-color: #D6BA73;
+  background: #fdf6e3;
+}
+.reserve-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+.reserve-label {
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+}
+.reserve-rate {
+  font-family: "Oswald", sans-serif;
+  font-size: 11px;
+  color: #888;
+}
+.booze-tower-cards {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 16px 0 22px;
+  flex-wrap: wrap;
+}
+.booze-tower-card {
+  flex: 1;
+  min-width: 100px;
+  background: #1a1a1a;
+  border: 2px solid #444;
+  border-radius: 12px;
+  padding: 16px 10px;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.booze-tower-card:hover {
+  border-color: #D6BA73;
+  transform: translateY(-3px);
+}
+.booze-tower-featured {
+  border-color: #D6BA73;
+  background: #111;
+}
+.booze-tower-best {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #D6BA73;
+  color: #000;
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.booze-tower-qty {
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+.booze-tower-price {
+  font-family: "Oswald", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #D6BA73;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.booze-tower-tag {
+  font-family: "Oswald", sans-serif;
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0.3px;
+}
+.booze-flavor-title {
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  color: #000;
+  margin: 10px 0 10px;
+  letter-spacing: 0.3px;
+}
+.flavor-table th {
+  background-color: #111 !important;
+  color: #D6BA73;
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  padding: 10px 14px;
+}
+.flavor-table tr:nth-child(even) td {
+  background-color: #e8e8e8;
+}
+.flavor-table tr:hover td {
+  background-color: #f5e9c0;
+}
+.flavor-name {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #111;
+  white-space: nowrap;
+}
+.flavor-base {
+  font-family: "Oswald", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  color: #555;
+  background: #fff3cd;
+  border-radius: 4px;
 }

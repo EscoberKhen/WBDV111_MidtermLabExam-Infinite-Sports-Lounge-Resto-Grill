@@ -14,20 +14,79 @@
 </head>
 <body>
 
-<div class="modal-overlay" id="loginModal">
+<div class="modal-overlay" id="bookingModal">
   <div class="modal-box">
     <a href="#" class="modal-close">✕</a>
-    <h2 class="modal-title">Login</h2>
-    <p class="modal-sub">Enter your details to place an order</p>
+    <h2 class="modal-title">Book a Reservation</h2>
+    <p class="modal-sub">Fill in your details to reserve</p>
     <div class="form-group">
-      <label>Your Name</label>
-      <input type="text" placeholder="Enter your name">
+      <label>Full Name</label>
+      <input type="text" placeholder="Enter your full name">
     </div>
     <div class="form-group">
-      <label>Table Number</label>
-      <input type="number" placeholder="e.g. 5" min="1">
+      <label>Contact Number</label>
+      <input type="tel" placeholder="e.g. 09XX XXX XXXX">
     </div>
-    <a href="#orderModal" class="modal-btn">Continue to Order →</a>
+    <div class="form-group">
+      <label>Reservation Date</label>
+      <input type="date">
+    </div>
+    <div class="form-group">
+      <label>Number of Guests</label>
+      <input type="number" placeholder="e.g. 4" min="1">
+    </div>
+    <div class="form-group">
+      <label>What would you like to reserve?</label>
+      <div class="reserve-options">
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="billiards">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Billiards</span>
+            <span class="reserve-rate">₱200/hr</span>
+          </span>
+        </label>
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="videoke">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Videoke</span>
+            <span class="reserve-rate">₱100/hr</span>
+          </span>
+        </label>
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="table">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Table</span>
+            <span class="reserve-rate">Walk-in</span>
+          </span>
+        </label>
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="booze">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Booze Tower</span>
+            <span class="reserve-rate">₱350/tower</span>
+          </span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Additional Notes (optional)</label>
+      <textarea placeholder="birthday celebration, preferred table area.." rows="2"></textarea>
+    </div>
+    <a href="#bookingDone" class="modal-btn">Confirm Reservation →</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bookingDone">
+  <div class="modal-box confirm-box">
+    <a href="#" class="modal-close">✕</a>
+    <div class="confirm-icon">✅</div>
+    <h2 class="modal-title">Reservation Confirmed!</h2>
+    <p class="modal-sub">Your reservation has been received.<br>We'll see you soon — sit back and relax!</p>
+    <a href="#" class="modal-btn">Done</a>
   </div>
 </div>
 <div class="modal-overlay" id="orderModal">
@@ -143,7 +202,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#booze">Booze</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#loginModal" class="nav-order-btn">🍽 Order Now</a></li>
+        <li><a href="#bookingModal" class="nav-order-btn">Book a Reservation</a></li>
     </ul>
 </nav>
 
@@ -245,24 +304,38 @@
     <hr>
     <h2>Booze</h2>
     <div class="Booze-images">
-        <div class="image-grid">
-            <div class="images-booze"><img src="./Booze.png" alt="Sports Lounge Interior"></div>
-        </div>
-    <table class="price-table">
-        <tr><th>Quantity</th><th>Price</th></tr>
-        <tr><td>1 Tower</td><td>PHP 350</td></tr>
-        <tr><td>2 Towers</td><td>PHP 550</td></tr>
-        <tr><td>3 Towers</td><td>PHP 950</td></tr>
-    </table>
+    <div class="booze-tower-cards">
+      <div class="booze-tower-card">
+        <div class="booze-tower-qty">1 Tower</div>
+        <div class="booze-tower-price">php350</div>
+        <div class="booze-tower-tag">Solo or Pair</div>
+      </div>
+      <div class="booze-tower-card booze-tower-featured">
+        <div class="booze-tower-best">BEST VALUE</div>
+        <div class="booze-tower-qty">2 Towers</div>
+        <div class="booze-tower-price">php550</div>
+        <div class="booze-tower-tag">Small Group</div>
+      </div>
+      <div class="booze-tower-card">
+        <div class="booze-tower-qty">3 Towers</div>
+        <div class="booze-tower-price">php950</div>
+        <div class="booze-tower-tag">Barkada Mode</div>
+      </div>
+    </div>
+    <h3 class="booze-flavor-title">Available Flavors</h3>
     <table class="flavor-table">
-        <tr><th>Flavor</th><th>Description</th></tr>
-        <tr><td>Blue Wave Tower</td><td>Bright, tangy, and irresistibly sharable - gin and blue lemonade combined in one playful tower.</td></tr>
-        <tr><td>Lemon Glow Tower</td><td>Zesty yellow lemonade and crisp gin combined in a tall, fun tower for all to enjoy.</td></tr>
-        <tr><td>Sunset Shandy</td><td>Bubbly, bright, and easy-drinking - beer and lemonade combined for maximum refreshment.</td></tr>
-        <tr><td>Brain Buster Tower</td><td>Tropical juices and rum come together in a colorful, playful, and shareable tower.</td></tr>
-        <tr><td>Pomelo Splash</td><td>Refreshing gin mixed with tangy pomelo - light, zesty, and built for sharing.</td></tr>
-        <tr><td>Gin Tea Tower</td><td>Bold gin layered with a rich, malty beer - smooth and flavorful.</td></tr>
-        <tr><td>Cucumber Breeze</td><td>A light, revitalizing tower of gin and cucumber - refreshing, fun, and made for sharing.</td></tr>
+        <tr>
+          <th style="width:32%">Flavor</th>
+          <th>Description</th>
+          <th style="width:13%;text-align:center;">Base</th>
+        </tr>
+        <tr><td class="flavor-name"> Blue Wave Tower</td><td>Bright, tangy, and irresistibly shareable &mdash; gin and blue lemonade in one playful tower.</td><td class="flavor-base">Gin</td></tr>
+        <tr><td class="flavor-name"> Lemon Glow Tower</td><td>Zesty yellow lemonade and crisp gin combined in a tall, fun tower for all to enjoy.</td><td class="flavor-base">Gin</td></tr>
+        <tr><td class="flavor-name"> Sunset Shandy</td><td>Bubbly, bright, and easy-drinking &mdash; beer and lemonade combined for maximum refreshment.</td><td class="flavor-base">Beer</td></tr>
+        <tr><td class="flavor-name"> Brain Buster Tower</td><td>Tropical juices and rum come together in a colorful, playful, and shareable tower.</td><td class="flavor-base">Rum</td></tr>
+        <tr><td class="flavor-name"> Pomelo Splash</td><td>Refreshing gin mixed with tangy pomelo &mdash; light, zesty, and built for sharing.</td><td class="flavor-base">Gin</td></tr>
+        <tr><td class="flavor-name"> Gin Tea Tower</td><td>Bold gin layered with a rich, malty beer &mdash; smooth and flavorful.</td><td class="flavor-base">Gin</td></tr>
+        <tr><td class="flavor-name"> Cucumber Breeze</td><td>A light, revitalizing tower of gin and cucumber &mdash; refreshing, fun, and made for sharing.</td><td class="flavor-base">Gin</td></tr>
     </table>
     </div>
 </div>
