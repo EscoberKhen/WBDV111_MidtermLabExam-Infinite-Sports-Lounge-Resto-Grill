@@ -126,7 +126,7 @@ section {
 }
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
     gap: 20px;
 }
 .card {
@@ -215,9 +215,10 @@ section {
     overflow: hidden;
     text-align: center;
 }
-.image-booze {
+.images-booze img {
     width: 100%;
-    height: 180px;
+    height: auto;
+    max-height: 400px;
     object-fit: cover;
     display: block;
 }
@@ -842,5 +843,25 @@ footer {
   .booze-tower-card {
     width: 100%;
     max-width: 300px;
+  }
+}
+.entertainment-cards {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.entertainment-gallery {
+  width: 100%;
+  margin-top: 10px;
+}
+.entertainment-gallery .image-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 600px) {
+  .entertainment-gallery .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .entertainment-gallery .image-item img {
+    height: 130px;
   }
 }
