@@ -816,3 +816,31 @@ footer {
   background: #fff3cd;
   border-radius: 4px;
 }
+@media (max-width: 600px) {
+  section {
+    padding: 60px 16px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .booze {
+    padding: 16px 10px;
+  }
+  .flavor-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .flavor-table {
+    min-width: 480px;
+  }
+  .booze-tower-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .booze-tower-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
