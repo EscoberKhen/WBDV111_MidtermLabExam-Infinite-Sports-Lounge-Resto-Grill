@@ -14,183 +14,6 @@
 </head>
 <body>
 
-<div class="modal-overlay" id="bookingModal">
-  <div class="modal-box">
-    <a href="#" class="modal-close">✕</a>
-    <h2 class="modal-title">Book a Reservation</h2>
-    <p class="modal-sub">Fill in your details to reserve</p>
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" placeholder="Enter your full name">
-    </div>
-    <div class="form-group">
-      <label>Contact Number</label>
-      <input type="tel" placeholder="e.g. 09XX XXX XXXX">
-    </div>
-    <div class="form-group">
-      <label>Reservation Date</label>
-      <input type="date">
-    </div>
-    <div class="form-group">
-      <label>Number of Guests</label>
-      <input type="number" placeholder="e.g. 4" min="1">
-    </div>
-    <div class="form-group">
-      <label>What would you like to reserve?</label>
-      <div class="reserve-options">
-        <label class="reserve-option">
-          <input type="checkbox" name="reserve" value="billiards">
-          <span class="reserve-card">
-            <span class="reserve-icon"></span>
-            <span class="reserve-label">Billiards</span>
-            <span class="reserve-rate">Php 200/hr</span>
-          </span>
-        </label>
-        <label class="reserve-option">
-          <input type="checkbox" name="reserve" value="videoke">
-          <span class="reserve-card">
-            <span class="reserve-icon"></span>
-            <span class="reserve-label">Videoke</span>
-            <span class="reserve-rate">Php 100/hr</span>
-          </span>
-        </label>
-        <label class="reserve-option">
-          <input type="checkbox" name="reserve" value="table">
-          <span class="reserve-card">
-            <span class="reserve-icon"></span>
-            <span class="reserve-label">Table</span>
-            <span class="reserve-rate">Walk-in</span>
-          </span>
-        </label>
-        <label class="reserve-option">
-          <input type="checkbox" name="reserve" value="booze">
-          <span class="reserve-card">
-            <span class="reserve-icon"></span>
-            <span class="reserve-label">Booze Tower</span>
-            <span class="reserve-rate">Php 350/tower</span>
-          </span>
-        </label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Additional Notes (optional)</label>
-      <textarea placeholder="birthday celebration, preferred table area.." rows="2"></textarea>
-    </div>
-    <a href="#bookingDone" class="modal-btn">Confirm Reservation</a>
-  </div>
-</div>
-
-<div class="modal-overlay" id="bookingDone">
-  <div class="modal-box confirm-box">
-    <a href="#" class="modal-close">✕</a>
-    <div class="confirm-icon"></div>
-    <h2 class="modal-title">Reservation Confirmed!</h2>
-    <p class="modal-sub">Your reservation has been received.<br>We'll see you soon - sit back and relax!</p>
-    <a href="#" class="modal-btn">Done</a>
-  </div>
-</div>
-<div class="modal-overlay" id="orderModal">
-  <div class="modal-box order-modal-box">
-    <a href="#" class="modal-close">✕</a>
-    <h2 class="modal-title">Order Menu</h2>
-    <p class="modal-sub">Browse items and fill in your order below</p>
-
-    <input type="radio" name="menutab" id="tab-bites"   class="tab-radio" checked>
-    <input type="radio" name="menutab" id="tab-grill"   class="tab-radio">
-    <input type="radio" name="menutab" id="tab-barkada" class="tab-radio">
-    <input type="radio" name="menutab" id="tab-allstar" class="tab-radio">
-    <input type="radio" name="menutab" id="tab-others"  class="tab-radio">
-    <input type="radio" name="menutab" id="tab-drinks"  class="tab-radio">
-
-    <div class="order-tabs">
-      <label for="tab-bites"   class="tab-btn">Bar Bites</label>
-      <label for="tab-grill"   class="tab-btn">Grill &amp; Thrill</label>
-      <label for="tab-barkada" class="tab-btn">Barkada Feast</label>
-      <label for="tab-allstar" class="tab-btn">All Star 99ers</label>
-      <label for="tab-others"  class="tab-btn">Others</label>
-      <label for="tab-drinks"  class="tab-btn">Drinks &amp; Booze</label>
-    </div>
-    <div class="menu-tab menu-bites">
-      <div class="menu-grid">
-        <div class="menu-item"><img src="./allstarnachoswithadded.jpg" alt="All-Star Nachos"><div class="menu-info"><span>All-Star Nachos</span><span>Php 250</span></div></div>
-        <div class="menu-item"><img src="./goldenFries.jpg" alt="Golden Fries"><div class="menu-info"><span>Golden Fries</span><span>Php 150</span></div></div>
-        <div class="menu-item"><img src="./kropekbunch.jpg" alt="The Kropek Bunch"><div class="menu-info"><span>The Kropek Bunch</span><span>Php 150</span></div></div>
-        <div class="menu-item"><img src="./garlicpeanut.jpg" alt="Garlic Peanuts"><div class="menu-info"><span>Garlic Peanuts</span><span>Php 150</span></div></div>
-      </div>
-    </div>
-    <div class="menu-tab menu-grill">
-      <div class="menu-grid">
-        <div class="menu-item"><img src="./porkbelly.jpg" alt="Pork Belly"><div class="menu-info"><span>Pork Belly</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./porkbarbecue.jpg" alt="Pork Barbecue"><div class="menu-info"><span>Pork Barbecue</span><span>Php 150</span></div></div>
-        <div class="menu-item"><img src="./chicharonbulaklak.jpg" alt="Chicharon Bulaklak"><div class="menu-info"><span>Chicharon Bulaklak</span><span>Php 150</span></div></div>
-      </div>
-    </div>
-    <div class="menu-tab menu-barkada">
-      <div class="menu-grid">
-        <div class="menu-item"><img src="./sizzlingporksisig.jpg" alt="Sizzling Pork Sisig"><div class="menu-info"><span>Sizzling Pork Sisig</span><span>Php 360</span></div></div>
-        <div class="menu-item"><img src="./chickenbbq.jpg" alt="Chicken Barbecue"><div class="menu-info"><span>Chicken Barbecue</span><span>Php 250</span></div></div>
-        <div class="menu-item"><img src="./porkbarbecue.jpg" alt="Pork Barbecue"><div class="menu-info"><span>Pork Barbecue</span><span>Php 360</span></div></div>
-        <div class="menu-item"><img src="./chicharonbulaklak.jpg" alt="Chicharon Bulaklak"><div class="menu-info"><span>Chicharon Bulaklak</span><span>Php 360</span></div></div>
-      </div>
-    </div>
-    <div class="menu-tab menu-allstar">
-      <p class="allstar-note">All items Php 99 each</p>
-      <div class="menu-grid">
-        <div class="menu-item"><img src="./sizzlingporksisig.jpg" alt="Sizzling Pork Sisig"><div class="menu-info"><span>Sizzling Pork Sisig</span><span>Php 99</span></div></div>
-        <div class="menu-item"><img src="./sizzlingliempo.jpg" alt="Sizzling Liempo"><div class="menu-info"><span>Sizzling Liempo</span><span>Php 99</span></div></div>
-        <div class="menu-item"><img src="./sizzlingporkchop.jpg" alt="Sizzling Porkchop"><div class="menu-info"><span>Sizzling Porkchop</span><span>Php 99</span></div></div>
-        <div class="menu-item"><img src="./friedchicken.jpg" alt="Crispy Fried Chicken"><div class="menu-info"><span>Crispy Fried Chicken</span><span>Php 99</span></div></div>
-        <div class="menu-item"><img src="./chickenbbq.jpg" alt="Chicken Barbecue"><div class="menu-info"><span>Chicken Barbecue</span><span>Php 99</span></div></div>
-        <div class="menu-item"><img src="./porkbarbecue.jpg" alt="Pork Barbecue"><div class="menu-info"><span>Pork Barbecue</span><span>Php 99</span></div></div>
-        <div class="menu-item"><img src="./porktonkasu.jpg" alt="Pork Tonkatsu"><div class="menu-info"><span>Pork Tonkatsu</span><span>Php 99</span></div></div>
-      </div>
-    </div>
-
-    <div class="menu-tab menu-others">
-      <div class="menu-grid">
-        <div class="menu-item"><img src="./pancitcanton.jpg" alt="Pancit Canton"><div class="menu-info"><span>Pancit Canton</span><span>Php 30</span></div></div>
-        <div class="menu-item"><img src="./Water.jpg" alt="Bottled Water"><div class="menu-info"><span>Bottled Water</span><span>Php 20</span></div></div>
-        <div class="menu-item"><img src="./Soda.jpg" alt="Soda in Can"><div class="menu-info"><span>Soda in Can</span><span>Php 25</span></div></div>
-        <div class="menu-item"><img src="./rice.jpg" alt="Rice"><div class="menu-info"><span>Rice</span><span>Php 15</span></div></div>
-      </div>
-    </div>
-
-    <div class="menu-tab menu-drinks">
-      <div class="booze-pricing">1 Tower — Php 350 &nbsp;|&nbsp; 2 Towers — Php 550 &nbsp;|&nbsp; 3 Towers — Php 950</div>
-      <div class="menu-grid">
-        <div class="menu-item"><img src="./Booze.png" alt="Blue Wave Tower"><div class="menu-info"><span>Blue Wave Tower</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./Booze.png" alt="Lemon Glow Tower"><div class="menu-info"><span>Lemon Glow Tower</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./Booze.png" alt="Sunset Shandy"><div class="menu-info"><span>Sunset Shandy</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./Booze.png" alt="Brain Buster Tower"><div class="menu-info"><span>Brain Buster Tower</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./Booze.png" alt="Pomelo Splash"><div class="menu-info"><span>Pomelo Splash</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./Booze.png" alt="Gin Tea Tower"><div class="menu-info"><span>Gin Tea Tower</span><span>Php 350</span></div></div>
-        <div class="menu-item"><img src="./Booze.png" alt="Cucumber Breeze"><div class="menu-info"><span>Cucumber Breeze</span><span>Php 350</span></div></div>
-      </div>
-    </div>
-
-    <div class="order-form-section">
-      <h3 class="order-form-title">Your Order</h3>
-      <div class="form-group">
-        <label>Items to Order (type the items you want)</label>
-        <textarea placeholder="e.g. 2x Pork Belly, 1x Golden Fries, 1x Blue Wave Tower..." rows="3"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Special Instructions (optional)</label>
-        <textarea placeholder="e.g. less spicy, extra rice, no onions..." rows="2"></textarea>
-      </div>
-      <a href="#orderDone" class="modal-btn">Place Order ✓</a>
-    </div>
-  </div>
-</div>
-<div class="modal-overlay" id="orderDone">
-  <div class="modal-box confirm-box">
-    <a href="#" class="modal-close">✕</a>
-    <div class="confirm-icon"></div>
-    <h2 class="modal-title">Order Placed!</h2>
-    <p class="modal-sub">Your order has been sent to our staff.<br>We'll serve you shortly sit back and relax!</p>
-    <a href="#" class="modal-btn">Done</a>
-  </div>
-</div>
 <nav class="navbar">
     <h2 class="logo"><i class="fas fa-utensils"></i> Infinite Sports Lounge &amp; Resto Grill</h2>
     <input type="checkbox" id="menu-toggle">
@@ -353,5 +176,182 @@
     <p>© 2026 Infinite Sports Lounge &amp; Resto Grill</p>
 </footer>
 
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <a href="#home" class="modal-close">✕</a>
+    <h2 class="modal-title">Book a Reservation</h2>
+    <p class="modal-sub">Fill in your details to reserve</p>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" placeholder="Enter your full name">
+    </div>
+    <div class="form-group">
+      <label>Contact Number</label>
+      <input type="tel" placeholder="e.g. 09XX XXX XXXX">
+    </div>
+    <div class="form-group">
+      <label>Reservation Date</label>
+      <input type="date">
+    </div>
+    <div class="form-group">
+      <label>Number of Guests</label>
+      <input type="number" placeholder="e.g. 4" min="1">
+    </div>
+    <div class="form-group">
+      <label>What would you like to reserve?</label>
+      <div class="reserve-options">
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="billiards">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Billiards</span>
+            <span class="reserve-rate">Php 200/hr</span>
+          </span>
+        </label>
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="videoke">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Videoke</span>
+            <span class="reserve-rate">Php 100/hr</span>
+          </span>
+        </label>
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="table">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Table</span>
+            <span class="reserve-rate">Walk-in</span>
+          </span>
+        </label>
+        <label class="reserve-option">
+          <input type="checkbox" name="reserve" value="booze">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Booze Tower</span>
+            <span class="reserve-rate">Php 350/tower</span>
+          </span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Additional Notes (optional)</label>
+      <textarea placeholder="birthday celebration, preferred table area.." rows="2"></textarea>
+    </div>
+    <a href="#bookingDone" class="modal-btn">Confirm Reservation</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bookingDone">
+  <div class="modal-box confirm-box">
+    <a href="#home" class="modal-close">✕</a>
+    <div class="confirm-icon"></div>
+    <h2 class="modal-title">Reservation Confirmed!</h2>
+    <p class="modal-sub">Your reservation has been received.<br>We'll see you soon - sit back and relax!</p>
+    <a href="#home" class="modal-btn">Done</a>
+  </div>
+</div>
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-box order-modal-box">
+    <a href="#home" class="modal-close">✕</a>
+    <h2 class="modal-title">Order Menu</h2>
+    <p class="modal-sub">Browse items and fill in your order below</p>
+
+    <input type="radio" name="menutab" id="tab-bites"   class="tab-radio" checked>
+    <input type="radio" name="menutab" id="tab-grill"   class="tab-radio">
+    <input type="radio" name="menutab" id="tab-barkada" class="tab-radio">
+    <input type="radio" name="menutab" id="tab-allstar" class="tab-radio">
+    <input type="radio" name="menutab" id="tab-others"  class="tab-radio">
+    <input type="radio" name="menutab" id="tab-drinks"  class="tab-radio">
+
+    <div class="order-tabs">
+      <label for="tab-bites"   class="tab-btn">Bar Bites</label>
+      <label for="tab-grill"   class="tab-btn">Grill &amp; Thrill</label>
+      <label for="tab-barkada" class="tab-btn">Barkada Feast</label>
+      <label for="tab-allstar" class="tab-btn">All Star 99ers</label>
+      <label for="tab-others"  class="tab-btn">Others</label>
+      <label for="tab-drinks"  class="tab-btn">Drinks &amp; Booze</label>
+    </div>
+    <div class="menu-tab menu-bites">
+      <div class="menu-grid">
+        <div class="menu-item"><img src="./allstarnachoswithadded.jpg" alt="All-Star Nachos"><div class="menu-info"><span>All-Star Nachos</span><span>Php 250</span></div></div>
+        <div class="menu-item"><img src="./goldenFries.jpg" alt="Golden Fries"><div class="menu-info"><span>Golden Fries</span><span>Php 150</span></div></div>
+        <div class="menu-item"><img src="./kropekbunch.jpg" alt="The Kropek Bunch"><div class="menu-info"><span>The Kropek Bunch</span><span>Php 150</span></div></div>
+        <div class="menu-item"><img src="./garlicpeanut.jpg" alt="Garlic Peanuts"><div class="menu-info"><span>Garlic Peanuts</span><span>Php 150</span></div></div>
+      </div>
+    </div>
+    <div class="menu-tab menu-grill">
+      <div class="menu-grid">
+        <div class="menu-item"><img src="./porkbelly.jpg" alt="Pork Belly"><div class="menu-info"><span>Pork Belly</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./porkbarbecue.jpg" alt="Pork Barbecue"><div class="menu-info"><span>Pork Barbecue</span><span>Php 150</span></div></div>
+        <div class="menu-item"><img src="./chicharonbulaklak.jpg" alt="Chicharon Bulaklak"><div class="menu-info"><span>Chicharon Bulaklak</span><span>Php 150</span></div></div>
+      </div>
+    </div>
+    <div class="menu-tab menu-barkada">
+      <div class="menu-grid">
+        <div class="menu-item"><img src="./sizzlingporksisig.jpg" alt="Sizzling Pork Sisig"><div class="menu-info"><span>Sizzling Pork Sisig</span><span>Php 360</span></div></div>
+        <div class="menu-item"><img src="./chickenbbq.jpg" alt="Chicken Barbecue"><div class="menu-info"><span>Chicken Barbecue</span><span>Php 250</span></div></div>
+        <div class="menu-item"><img src="./porkbarbecue.jpg" alt="Pork Barbecue"><div class="menu-info"><span>Pork Barbecue</span><span>Php 360</span></div></div>
+        <div class="menu-item"><img src="./chicharonbulaklak.jpg" alt="Chicharon Bulaklak"><div class="menu-info"><span>Chicharon Bulaklak</span><span>Php 360</span></div></div>
+      </div>
+    </div>
+    <div class="menu-tab menu-allstar">
+      <p class="allstar-note">All items Php 99 each</p>
+      <div class="menu-grid">
+        <div class="menu-item"><img src="./sizzlingporksisig.jpg" alt="Sizzling Pork Sisig"><div class="menu-info"><span>Sizzling Pork Sisig</span><span>Php 99</span></div></div>
+        <div class="menu-item"><img src="./sizzlingliempo.jpg" alt="Sizzling Liempo"><div class="menu-info"><span>Sizzling Liempo</span><span>Php 99</span></div></div>
+        <div class="menu-item"><img src="./sizzlingporkchop.jpg" alt="Sizzling Porkchop"><div class="menu-info"><span>Sizzling Porkchop</span><span>Php 99</span></div></div>
+        <div class="menu-item"><img src="./friedchicken.jpg" alt="Crispy Fried Chicken"><div class="menu-info"><span>Crispy Fried Chicken</span><span>Php 99</span></div></div>
+        <div class="menu-item"><img src="./chickenbbq.jpg" alt="Chicken Barbecue"><div class="menu-info"><span>Chicken Barbecue</span><span>Php 99</span></div></div>
+        <div class="menu-item"><img src="./porkbarbecue.jpg" alt="Pork Barbecue"><div class="menu-info"><span>Pork Barbecue</span><span>Php 99</span></div></div>
+        <div class="menu-item"><img src="./porktonkasu.jpg" alt="Pork Tonkatsu"><div class="menu-info"><span>Pork Tonkatsu</span><span>Php 99</span></div></div>
+      </div>
+    </div>
+
+    <div class="menu-tab menu-others">
+      <div class="menu-grid">
+        <div class="menu-item"><img src="./pancitcanton.jpg" alt="Pancit Canton"><div class="menu-info"><span>Pancit Canton</span><span>Php 30</span></div></div>
+        <div class="menu-item"><img src="./Water.jpg" alt="Bottled Water"><div class="menu-info"><span>Bottled Water</span><span>Php 20</span></div></div>
+        <div class="menu-item"><img src="./Soda.jpg" alt="Soda in Can"><div class="menu-info"><span>Soda in Can</span><span>Php 25</span></div></div>
+        <div class="menu-item"><img src="./rice.jpg" alt="Rice"><div class="menu-info"><span>Rice</span><span>Php 15</span></div></div>
+      </div>
+    </div>
+
+    <div class="menu-tab menu-drinks">
+      <div class="booze-pricing">1 Tower — Php 350 &nbsp;|&nbsp; 2 Towers — Php 550 &nbsp;|&nbsp; 3 Towers — Php 950</div>
+      <div class="menu-grid">
+        <div class="menu-item"><img src="./Booze.png" alt="Blue Wave Tower"><div class="menu-info"><span>Blue Wave Tower</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./Booze.png" alt="Lemon Glow Tower"><div class="menu-info"><span>Lemon Glow Tower</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./Booze.png" alt="Sunset Shandy"><div class="menu-info"><span>Sunset Shandy</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./Booze.png" alt="Brain Buster Tower"><div class="menu-info"><span>Brain Buster Tower</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./Booze.png" alt="Pomelo Splash"><div class="menu-info"><span>Pomelo Splash</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./Booze.png" alt="Gin Tea Tower"><div class="menu-info"><span>Gin Tea Tower</span><span>Php 350</span></div></div>
+        <div class="menu-item"><img src="./Booze.png" alt="Cucumber Breeze"><div class="menu-info"><span>Cucumber Breeze</span><span>Php 350</span></div></div>
+      </div>
+    </div>
+
+    <div class="order-form-section">
+      <h3 class="order-form-title">Your Order</h3>
+      <div class="form-group">
+        <label>Items to Order (type the items you want)</label>
+        <textarea placeholder="2x Pork Belly, 1x Golden Fries, 1x Blue Wave Tower..." rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Special Instructions (optional)</label>
+        <textarea placeholder="less spicy, extra rice, no onions..." rows="2"></textarea>
+      </div>
+      <a href="#orderDone" class="modal-btn">Place Order ✓</a>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="orderDone">
+  <div class="modal-box confirm-box">
+    <a href="#home" class="modal-close">✕</a>
+    <div class="confirm-icon"></div>
+    <h2 class="modal-title">Order Placed!</h2>
+    <p class="modal-sub">Your order has been sent to our staff.<br>We'll serve you shortly sit back and relax!</p>
+    <a href="#home" class="modal-btn">Done</a>
+  </div>
+</div>
 </body>
 </html>
