@@ -136,23 +136,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const reserveOptions = document.querySelectorAll(".reserve-option");
 
-   checkboxes.forEach(cb => {
+    let selectedOrder = [];
+
+checkboxes.forEach(cb => {
     cb.addEventListener("change", function () {
 
-        const checked = Array.from(checkboxes).filter(c => c.checked);
+        if (this.checked) {
+            selectedOrder.push(this);
 
-        if (checked.length > 3) {
-            this.checked = false;
-            return;
+            if (selectedOrder.length > 3) {
+                const removed = selectedOrder.shift();
+                removed.checked = false;
+                removed.closest(".reserve-option").classList.remove("active");
+            }
+
+        } 
+        
+        else {
+            selectedOrder = selectedOrder.filter(item => item !== this);
         }
 
         reserveOptions.forEach(opt => opt.classList.remove("active"));
 
-        checked.forEach(c => {
-            c.closest(".reserve-option").classList.add("active");
+        selectedOrder.forEach(cb => {
+            cb.closest(".reserve-option").classList.add("active");
+            });
         });
     });
-});
 
     const messageBox = document.createElement("div");
     messageBox.style.marginTop = "10px";
