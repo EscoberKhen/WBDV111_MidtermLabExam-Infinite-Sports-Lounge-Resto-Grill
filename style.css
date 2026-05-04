@@ -957,3 +957,39 @@ hr {
   border: none;
   border-top: 1px solid rgba(57,255,20,0.12);
 }
+.page-section {
+  display: none;
+}
+.page-section:target {
+  display: block;
+}
+.page-section#home:target {
+  display: flex;
+}
+.page-sections:not(:has(.page-section:target)) #home {
+  display: flex;
+}
+.page-section {
+  padding-top: 80px;
+}
+.page-section.hero {
+  padding-top: 65px;
+}
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-section:target {
+  animation: sectionFadeIn 0.45s ease forwards;
+}
+
+.page-sections:not(:has(.page-section:target)) #home {
+  animation: sectionFadeIn 0.45s ease forwards;
+}
