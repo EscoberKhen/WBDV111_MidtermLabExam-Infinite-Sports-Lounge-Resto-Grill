@@ -6,51 +6,76 @@ document.addEventListener("DOMContentLoaded", function () {
     const guestsInput = document.querySelector('#bookingModal input[type="number"]');
     const checkboxes = document.querySelectorAll('#bookingModal input[type="checkbox"]');
 
+    // Error messages for required fields and invalid formats
+    function showFieldError(input, message) {
+        let error = input.nextElementSibling;
+
+        if (!error || !error.classList.contains("error-text")) {
+            error = document.createElement("div");
+            error.classList.add("error-text");
+            error.style.color = "red";
+            error.style.fontSize = "12px";
+            error.style.marginTop = "4px";
+            input.parentNode.appendChild(error);
+        }
+
+        error.textContent = message;
+        input.style.border = "2px solid red";
+    }
+
+    function clearFieldError(input) {
+        let error = input.nextElementSibling;
+
+        if (error && error.classList.contains("error-text")) {
+            error.remove();
+        }
+
+        input.style.border = "";
+    }
+
+    // Clears all errors
+    [nameInput, contactInput, guestsInput].forEach(input => {
+        input.addEventListener("input", () => clearFieldError(input));
+    });
+
+    // Name input format: only letters and spaces, auto-capitalization, max 50 chars
     nameInput.addEventListener("input", function () {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
+        this.value = this.value.replace(/\s+/g, " ").trimStart();
+        this.value = this.value
+            .toLowerCase()
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
 
-    this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
-
-    this.value = this.value.replace(/\s+/g, " ").trimStart();
-
-    this.value = this.value
-        .toLowerCase()
-        .split(" ")
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
-
-    if (this.value.length > 50) {
-        this.value = this.value.slice(0, 50);
+        if (this.value.length > 50) {
+            this.value = this.value.slice(0, 50);
         }
     });
 
+    // Contact input format: auto-format as 09XX-XXX-XXXX, only digits allowed, max 11 digits
     contactInput.addEventListener("input", function () {
+        let numbers = this.value.replace(/[^0-9]/g, "");
 
-    let numbers = this.value.replace(/[^0-9]/g, "");
+        if (numbers.length > 0 && !numbers.startsWith("09")) {
+            numbers = "09" + numbers.replace(/^0+/, "");
+        }
 
-    if (numbers.length > 0 && !numbers.startsWith("09")) {
-        numbers = "09" + numbers.replace(/^0+/, "");
-    }
+        numbers = numbers.slice(0, 11);
 
-    numbers = numbers.slice(0, 11);
+        let formatted = "";
+        if (numbers.length > 0) formatted = numbers.substring(0, 4);
+        if (numbers.length >= 5) formatted += "-" + numbers.substring(4, 7);
+        if (numbers.length >= 8) formatted += "-" + numbers.substring(7, 11);
 
-    let formatted = "";
+        this.value = formatted;
+    });
 
-    if (numbers.length > 0) {
-        formatted = numbers.substring(0, 4);
-    }
-    if (numbers.length >= 5) {
-        formatted += "-" + numbers.substring(4, 7);
-    }
-    if (numbers.length >= 8) {
-        formatted += "-" + numbers.substring(7, 11);
-    }
-
-    this.value = formatted;
-});
-
+    // Date input format: MM/DD/YYYY, only digits and slashes allowed, auto-formatting, future dates only
     const yearSelect = document.getElementById("year");
     const monthSelect = document.getElementById("month");
     const daySelect = document.getElementById("day");
+
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth() + 1;
@@ -75,13 +100,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateDaysAndScroll() {
         const month = parseInt(monthSelect.value);
         const year = parseInt(yearSelect.value);
-
         if (!month || !year) return;
 
         const daysInMonth = new Date(year, month, 0).getDate();
         populateDays(daysInMonth);
 
-        if (parseInt(month) === currentMonth) {
+        if (month === currentMonth) {
             daySelect.value = currentDay;
         } 
         
@@ -98,154 +122,121 @@ document.addEventListener("DOMContentLoaded", function () {
     monthSelect.value = currentMonth;
     updateDaysAndScroll();
 
-    function getSelectedDate(showMessage) {
+    function getSelectedDate() {
         const year = yearSelect.value;
         const month = monthSelect.value;
         const day = daySelect.value;
 
-        if (!year || !month || !day) {
-            showMessage("Please select a complete reservation date.", "error");
-            return null;
-        }
-
-        const paddedMonth = month.padStart(2, "0");
-        const paddedDay = day.padStart(2, "0");
-        const dateStr = `${year}-${paddedMonth}-${paddedDay}`;
+        if (!year || !month || !day) return null;
 
         const selectedDate = new Date(year, month - 1, day);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        if (selectedDate < today) {
-            showMessage("Please select a future date.", "error");
-            return null;
-        }
+        if (selectedDate < today) return null;
 
-        return dateStr;
+        return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     }
 
+    // Guests input format: only digits allowed, max 20 guests
     guestsInput.addEventListener("input", function () {
         this.value = this.value.replace(/[^0-9]/g, "");
-
         const value = parseInt(this.value || "0");
-
-        if (value > 20) {
-            this.value = 20;
-        }
+        if (value > 20) this.value = 20;
     });
 
+    // Checkboxes: select up to 3 options, visually indicate selection, deselect oldest if more than 3
     const reserveOptions = document.querySelectorAll(".reserve-option");
-
     let selectedOrder = [];
 
-checkboxes.forEach(cb => {
-    cb.addEventListener("change", function () {
+    checkboxes.forEach(cb => {
+        cb.addEventListener("change", function () {
 
-        if (this.checked) {
-            selectedOrder.push(this);
+            if (this.checked) {
+                selectedOrder.push(this);
 
-            if (selectedOrder.length > 3) {
-                const removed = selectedOrder.shift();
-                removed.checked = false;
-                removed.closest(".reserve-option").classList.remove("active");
+                if (selectedOrder.length > 3) {
+                    const removed = selectedOrder.shift();
+                    removed.checked = false;
+                    removed.closest(".reserve-option").classList.remove("active");
+                }
+            } 
+            
+            else {
+                selectedOrder = selectedOrder.filter(item => item !== this);
             }
 
-        } 
-        
-        else {
-            selectedOrder = selectedOrder.filter(item => item !== this);
-        }
+            reserveOptions.forEach(opt => opt.classList.remove("active"));
 
-        reserveOptions.forEach(opt => opt.classList.remove("active"));
-
-        selectedOrder.forEach(cb => {
-            cb.closest(".reserve-option").classList.add("active");
+            selectedOrder.forEach(cb => {
+                cb.closest(".reserve-option").classList.add("active");
             });
         });
     });
 
-    const messageBox = document.createElement("div");
-    messageBox.style.marginTop = "10px";
-    messageBox.style.padding = "10px";
-    messageBox.style.borderRadius = "6px";
-    messageBox.style.display = "none";
-    messageBox.style.fontSize = "14px";
-
-    const modalBox = document.querySelector("#bookingModal .modal-box");
-    if (modalBox) {
-        modalBox.appendChild(messageBox);
-    }
-
-    function showMessage(text, type) {
-        messageBox.style.display = "block";
-        messageBox.textContent = text;
-
-        if (type === "error") {
-            messageBox.style.background = "#ffe0e0";
-            messageBox.style.color = "#a10000";
-        } 
-        
-        else {
-            messageBox.style.background = "#e0ffe0";
-            messageBox.style.color = "#006600";
-        }
-    }
-
+    // Reservation confirmation and submission: validate all fields, show errors
     confirmBtn.addEventListener("click", function (event) {
         event.preventDefault();
 
         const name = nameInput.value.trim();
         const contact = contactInput.value.trim();
-        const cleanContact = contact.replace(/[^0-9]/g, "");
-
-        if (cleanContact.length !== 11) {
-            showMessage("Contact number must be 11 digits.", "error");
-            return;
-        }
-        
-        const date = getSelectedDate(showMessage);
-        if (!date) return;
-
         const guests = guestsInput.value;
+        const cleanContact = contact.replace(/[^0-9]/g, "");
+        const date = getSelectedDate();
 
+        let isValid = true;
+
+        // Name check
+        if (!name) {
+            showFieldError(nameInput, "Please fill in this required field.");
+            isValid = false;
+        }
+
+        // Contact check
+        if (!contact) {
+            showFieldError(contactInput, "Please fill in this required field.");
+            isValid = false;
+        } 
+        
+        else if (cleanContact.length !== 11) {
+            showFieldError(contactInput, "Contact number must be 11 digits.");
+            isValid = false;
+        }
+
+        // Guests number check
+        if (!guests) {
+            showFieldError(guestsInput, "Please fill in this required field.");
+            isValid = false;
+        }
+
+        // Date check
+        if (!date) {
+            showFieldError(dateInput, "Please select a valid future date.");
+            isValid = false;
+        }
+
+        // Checkbox (only 1 allowed)
         let selected = [];
         checkboxes.forEach(cb => {
-            if (cb.checked) {
-                selected.push(cb.value);
-            }
+            if (cb.checked) selected.push(cb.value);
         });
 
-        const guestCount = parseInt(guests);
-
-        if (isNaN(guestCount) || guestCount < 1 || guestCount > 20) {
-            showMessage("Guests must be between 1 and 20.", "error");
-            return;
-        }
-
-        if (!name || !contact || !date || !guests) {
-            showMessage("Please fill in all required fields.", "error");
-            return;
-        }
-
         if (selected.length !== 1) {
-            showMessage("Please select exactly one reservation option.", "error");
-            return;
+            showFieldError(checkboxes[0].closest(".reserve-option"),"Please select a reservation option.");
+            isValid = false;
         }
 
-        showMessage("Reservation successful! Redirecting...", "success");
+        if (!isValid) return;
 
-        reserveOptions.forEach(opt => opt.classList.remove("active"));
+        showFieldError("Reservation successful!");
 
+        // Resets the form after successful submission
         nameInput.value = "";
         contactInput.value = "";
-        yearSelect.value = currentYear;
-        monthSelect.value = currentMonth;
-        updateDaysAndScroll();
         guestsInput.value = "";
         checkboxes.forEach(cb => cb.checked = false);
-
-        setTimeout(() => {
-            window.location.hash = "bookingDone";
-        }, 800);
+        reserveOptions.forEach(opt => opt.classList.remove("active"));
+        monthSelect.value = currentMonth;
+        updateDaysAndScroll();
     });
 });
