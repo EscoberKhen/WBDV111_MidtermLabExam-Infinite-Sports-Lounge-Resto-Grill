@@ -221,11 +221,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (cb.checked) selected.push(cb.value);
         });
 
-        if (selected.length !== 1) {
-            showFieldError(checkboxes[0].closest(".reserve-option"),"Please select a reservation option.");
-            isValid = false;
-        }
-
         if (!isValid) return;
 
         showFieldError("Reservation successful!");
