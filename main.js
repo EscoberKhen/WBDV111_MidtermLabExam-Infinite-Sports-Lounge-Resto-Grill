@@ -248,5 +248,4 @@ checkboxes.forEach(cb => {
             window.location.hash = "bookingDone";
         }, 800);
     });
-
 });
