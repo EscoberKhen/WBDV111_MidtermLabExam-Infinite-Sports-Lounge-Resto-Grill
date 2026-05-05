@@ -23,6 +23,7 @@ h2 {
 h3 {
   color: #39FF14;
   text-align: center;
+  margin-top: 50px;
 }
 h1 {
   font-family: "Sekuya", system-ui;
@@ -155,6 +156,7 @@ section {
 }
 .card p {
     color: #39FF14;
+    text-align: center !important;
 }
 .card:hover {
     transform: translateY(-10px);
@@ -366,6 +368,69 @@ footer {
     text-align: center;
     padding: 20px;
     border-top: 1px solid rgba(57,255,20,0.15);
+}
+footer p {
+    text-align: center;
+}
+#contact {
+    text-align: center;
+}
+#contact p {
+    text-align: center;
+}
+#contact a {
+    display: inline-block;
+}
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    cursor: zoom-out;
+}
+.lightbox-overlay.active {
+    display: flex;
+}
+.lightbox-overlay img {
+    max-width: 92vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 2px solid rgba(57,255,20,0.4);
+    box-shadow: 0 0 40px rgba(57,255,20,0.25);
+    cursor: default;
+    animation: lightboxFadeIn 0.22s ease;
+}
+@keyframes lightboxFadeIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+.lightbox-close {
+    position: fixed;
+    top: 18px;
+    right: 24px;
+    font-size: 32px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10000;
+    transition: color 0.15s;
+}
+.lightbox-close:hover {
+    color: #39FF14;
+}
+.image-item img,
+.card img {
+    cursor: zoom-in;
+    transition: opacity 0.18s;
+}
+.image-item img:hover,
+.card img:hover {
+    opacity: 0.85;
 }
 @media (max-width: 480px) {
   .box {
@@ -944,6 +1009,26 @@ footer {
   .entertainment-gallery .image-item img {
     height: 130px;
   }
+}
+.menu-category {
+  margin-bottom: 50px;
+  padding: 24px 20px;
+  border: 1px solid rgba(57,255,20,0.12);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+}
+.menu-category h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(57,255,20,0.18);
+}
+.allstar-label {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 13px;
+  color: #39FF14;
+  margin-bottom: 16px;
 }
 .section-bg {
   background-color: #0d0d0d;

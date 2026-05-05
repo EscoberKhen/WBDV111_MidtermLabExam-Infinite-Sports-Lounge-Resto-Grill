@@ -317,4 +317,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         }, 800);
     });
+
+    //  Lightbox for images 
+    const lightboxOverlay = document.getElementById("lightboxOverlay");
+    const lightboxImg     = document.getElementById("lightboxImg");
+    const lightboxClose   = document.getElementById("lightboxClose");
+
+    const clickableImgs = document.querySelectorAll(".image-item img, .card img");
+
+    clickableImgs.forEach(img => {
+        img.addEventListener("click", function () {
+            lightboxImg.src = this.src;
+            lightboxImg.alt = this.alt;
+            lightboxOverlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+    });
+
+    function closeLightbox() {
+        lightboxOverlay.classList.remove("active");
+        lightboxImg.src = "";
+        document.body.style.overflow = "";
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightboxOverlay.addEventListener("click", function (e) {
+        if (e.target === lightboxOverlay) closeLightbox();
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeLightbox();
+    });
 });
