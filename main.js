@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const confirmBtn = document.querySelector("#bookingModal .modal-btn");
+    const confirmBtn = document.getElementById("confirmReservationBtn");
     const nameInput = document.querySelector('#bookingModal input[type="text"]');
     const contactInput = document.querySelector('#bookingModal input[type="tel"]');
     const guestsInput = document.querySelector('#bookingModal input[type="number"]');
@@ -203,8 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         ampmSelect.addEventListener("change", updateHours);
 
-// initialize
-updateHours();
+    updateHours();
 
     // Guests input format: only digits allowed, max 20 guests
     guestsInput.addEventListener("input", function () {
@@ -215,12 +214,12 @@ updateHours();
 
     // Checkboxes: select up to 3 options, visually indicate selection, deselect oldest if more than 3
     const reserveOptions = document.querySelectorAll(".reserve-option");
+
+    clearCheckboxError();
     let selectedOrder = [];
 
     checkboxes.forEach(cb => {
         cb.addEventListener("change", function () {
-
-            clearCheckboxError();
 
             if (this.checked) {
                 selectedOrder.push(this);
@@ -281,9 +280,12 @@ updateHours();
 
         // Date check
         if (!date) {
-            showFieldError(dateInput, "Please select a valid future date.");
+            showFieldError(daySelect, "Please select a valid future date.");
             isValid = false;
         }
+
+        // Clears old checkbox error
+        clearCheckboxError();
 
         let selected = [];
         checkboxes.forEach(cb => {
@@ -291,14 +293,13 @@ updateHours();
         });
 
         if (selected.length === 0) {
-        showCheckboxError("Please select one of the options.");
-        isValid = false;
-            } 
-            
+            showCheckboxError("Please select one of the options.");
+            isValid = false;
+        }
 
         if (!isValid) return;
 
-        showFieldError("Reservation successful!");
+        showMessage("Reservation successful! Redirecting...", "success");
 
         // Resets the form after successful submission
         nameInput.value = "";
@@ -308,5 +309,12 @@ updateHours();
         reserveOptions.forEach(opt => opt.classList.remove("active"));
         monthSelect.value = currentMonth;
         updateDaysAndScroll();
+
+        setTimeout(() => {
+            document.getElementById("bookingDone").scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+                });
+        }, 800);
     });
 });
