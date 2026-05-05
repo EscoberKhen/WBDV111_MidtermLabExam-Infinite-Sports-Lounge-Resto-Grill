@@ -33,6 +33,27 @@ document.addEventListener("DOMContentLoaded", function () {
         input.style.border = "";
     }
 
+    function showCheckboxError(message) {
+        let existing = document.querySelector(".checkbox-error");
+        if (existing) return;
+
+    const lastOption = document.querySelector(".reserve-option:last-of-type");
+
+    const error = document.createElement("div");
+        error.classList.add("checkbox-error");
+        error.style.color = "red";
+        error.style.fontSize = "12px";
+        error.style.marginTop = "6px";
+        error.textContent = message;
+
+        lastOption.parentNode.appendChild(error);
+    }
+
+    function clearCheckboxError() {
+        let error = document.querySelector(".checkbox-error");
+        if (error) error.remove();
+    }
+
     // Clears all errors
     [nameInput, contactInput, guestsInput].forEach(input => {
         input.addEventListener("input", () => clearFieldError(input));
@@ -83,11 +104,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     yearSelect.innerHTML = `<option value="${currentYear}">${currentYear}</option>`;
 
-    let monthOptions = "";
-    for (let m = 1; m <= 12; m++) {
-        monthOptions += `<option value="${m}">${m}</option>`;
-    }
-    monthSelect.innerHTML = monthOptions;
+    const months = ["January", "February", "March", "April", "May", "June", 
+                "July", "August", "September", "October", "November", "December"];
+
+        let monthOptions = "";
+    months.forEach((month, index) => {
+    monthOptions += `<option value="${index + 1}">${month}</option>`;
+        });
+
+        monthSelect.innerHTML = monthOptions;
 
     function populateDays(days) {
         let dayOptions = "";
@@ -138,6 +163,49 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     }
 
+    //Time input format: only digits allowed, auto-format to 12-hour with AM/PM
+    const hourSelect = document.getElementById("hour");
+    const ampmSelect = document.getElementById("ampm");
+
+    const allowedTimes = [
+        { hour: 11, period: "AM" },
+        { hour: 12, period: "PM" },
+        { hour: 1, period: "PM" },
+        { hour: 2, period: "PM" },
+        { hour: 3, period: "PM" },
+        { hour: 4, period: "PM" },
+        { hour: 5, period: "PM" },
+        { hour: 6, period: "PM" },
+        { hour: 7, period: "PM" },
+        { hour: 8, period: "PM" },
+        { hour: 9, period: "PM" },
+        { hour: 10, period: "PM" },
+        { hour: 11, period: "PM" },
+        { hour: 12, period: "AM" },
+        { hour: 1, period: "AM" },
+        { hour: 2, period: "AM" },
+        { hour: 3, period: "AM" },
+        ];
+
+        function updateHours() {
+        const selectedPeriod = ampmSelect.value;
+
+        let options = "";
+
+        allowedTimes.forEach(t => {
+                if (t.period === selectedPeriod) {
+                    options += `<option value="${t.hour}">${t.hour}</option>`;
+                }
+            });
+
+            hourSelect.innerHTML = options;
+        }
+
+        ampmSelect.addEventListener("change", updateHours);
+
+// initialize
+updateHours();
+
     // Guests input format: only digits allowed, max 20 guests
     guestsInput.addEventListener("input", function () {
         this.value = this.value.replace(/[^0-9]/g, "");
@@ -152,10 +220,12 @@ document.addEventListener("DOMContentLoaded", function () {
     checkboxes.forEach(cb => {
         cb.addEventListener("change", function () {
 
+            clearCheckboxError();
+
             if (this.checked) {
                 selectedOrder.push(this);
 
-                if (selectedOrder.length > 3) {
+                if (selectedOrder.length > 2) {
                     const removed = selectedOrder.shift();
                     removed.checked = false;
                     removed.closest(".reserve-option").classList.remove("active");
@@ -215,11 +285,16 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
-        // Checkbox (only 1 allowed)
         let selected = [];
         checkboxes.forEach(cb => {
             if (cb.checked) selected.push(cb.value);
         });
+
+        if (selected.length === 0) {
+        showCheckboxError("Please select one of the options.");
+        isValid = false;
+            } 
+            
 
         if (!isValid) return;
 

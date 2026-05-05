@@ -189,20 +189,25 @@
     </div>
     <div class="form-group">
       <label>Contact Number</label>
-      <input type="tel" placeholder="e.g. 09XX XXX XXXX" maxlength="13">
+      <input type="tel" placeholder="e.g. 09XX-XXX-XXXX" maxlength="13">
     </div>
     <div class="form-group">
       <label>Reservation Date</label>
       <select id="month"></select>
       <select id="day"></select>
       <select id="year"></select>
+      <select id="hour"></select>
+      <select id="ampm">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
     </div>
     <div class="form-group">
       <label>Number of Guests</label>
       <input type="number" placeholder="e.g. 4" min="1">
     </div>
     <div class="form-group">
-      <label>What would you like to reserve? (Select up to 3 only)</label>
+      <label>What would you like to reserve? (Select up to 2 only)</label>
       <div class="reserve-options">
         <label class="reserve-option">
           <input type="checkbox" name="reserve" value="billiards">
@@ -226,14 +231,6 @@
             <span class="reserve-icon"></span>
             <span class="reserve-label">Table</span>
             <span class="reserve-rate">Walk-in</span>
-          </span>
-        </label>
-        <label class="reserve-option">
-          <input type="checkbox" name="reserve" value="booze">
-          <span class="reserve-card">
-            <span class="reserve-icon"></span>
-            <span class="reserve-label">Booze Tower</span>
-            <span class="reserve-rate">Php 350/tower</span>
           </span>
         </label>
       </div>
