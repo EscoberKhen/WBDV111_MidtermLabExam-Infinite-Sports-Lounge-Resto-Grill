@@ -215,6 +215,83 @@ p {
     position: relative;
     z-index: 2;
 }
+
+/* ── TABLET & MOBILE NAVBAR ── */
+@media (max-width: 900px) {
+    .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0 20px;
+    }
+
+    .logo-link {
+        padding: 12px 6px;
+    }
+
+    .menu-icon {
+        display: block;
+        padding: 12px 0;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.97);
+        border-top: 1px solid rgba(57, 255, 20, 0.2);
+        padding: 10px 0 16px;
+        gap: 2px;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 20px;
+        font-size: 15px;
+        border-radius: 0;
+        border-left: 3px solid transparent;
+        transition: color 0.18s, background 0.18s, border-color 0.18s;
+    }
+
+    .nav-links a:hover {
+        border-left-color: #39FF14;
+        background: rgba(57, 255, 20, 0.06);
+    }
+
+    .nav-links .nav-order-btn {
+        margin: 10px 20px 0;
+        text-align: center;
+        border-radius: 6px;
+        border-left: none;
+        padding: 12px 20px;
+    }
+
+    /* Show nav when checkbox is checked */
+    #menu-toggle:checked ~ .nav-links {
+        display: flex;
+        animation: navSlideDown 0.25s ease forwards;
+    }
+
+    /* Toggle icon: ☰ → ✕ */
+    #menu-toggle:checked ~ .menu-icon {
+        color: #39FF14;
+    }
+
+    @keyframes navSlideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
 .hero {
     height: 100vh;
     background-color: #000;
