@@ -5,10 +5,14 @@
 }
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 body {
     font-family: Arial, sans-serif;
     background-color: #0a0a0a;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 h2 {
   font-family: "Oswald", sans-serif;
@@ -50,11 +54,14 @@ p {
     height: 65px;
     position: fixed;
     width: 100%;
+    max-width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
     box-shadow: 0 2px 16px rgba(57,255,20,0.2), 0 2px 8px rgba(0,0,0,0.8);
     backdrop-filter: blur(2px);
     border-bottom: 1px solid rgba(57,255,20,0.25);
+    overflow: hidden;
 }
 .navbar::before {
     content: '';
@@ -222,6 +229,7 @@ p {
         flex-wrap: wrap;
         height: auto;
         padding: 0 20px;
+        overflow: visible;
     }
 
     .logo-link {
@@ -270,30 +278,40 @@ p {
         padding: 12px 20px;
     }
 
-    /* Show nav when checkbox is checked */
     #menu-toggle:checked ~ .nav-links {
         display: flex;
         animation: navSlideDown 0.25s ease forwards;
     }
 
-    /* Toggle icon: ☰ → ✕ */
     #menu-toggle:checked ~ .menu-icon {
         color: #39FF14;
     }
 
     @keyframes navSlideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-8px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(-8px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero mobile fix */
+    .hero {
+        height: 100svh;
+        padding: 80px 16px 24px;
+    }
+
+    .hero-content::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero-tagline {
+        font-size: 13px;
+        letter-spacing: 3px;
+        padding: 8px 16px;
     }
 }
 .hero {
     height: 100vh;
+    width: 100%;
     background-color: #000;
     background-image: 
         radial-gradient(ellipse at 50% 40%, rgba(200,146,42,0.10) 0%, transparent 55%),
@@ -307,6 +325,7 @@ p {
     text-align: center;
     color: white;
     padding-top: 60px;
+    overflow: hidden;
 }
 .btn {
     margin-top: 20px;
