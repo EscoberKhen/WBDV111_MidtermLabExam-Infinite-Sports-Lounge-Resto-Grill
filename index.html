@@ -15,7 +15,11 @@
 <body>
 
 <nav class="navbar">
-    <h2 class="logo"><i class="fas fa-utensils"></i> Infinite Sports Lounge &amp; Resto Grill</h2>
+    <a href="#home" class="logo-link">
+      <span class="navbar-logo-text">
+        <span class="logo-infinite">INFINITE</span><span class="logo-divider">∞</span><span class="logo-resto">RESTO GRILL</span>
+      </span>
+    </a>
     <input type="checkbox" id="menu-toggle">
     <label for="menu-toggle" class="menu-icon">☰</label>
     <ul class="nav-links">
@@ -31,9 +35,10 @@
 
 <div class="page-sections">
 <section id="home" class="hero page-section">
-    <div>
-        <h1>Welcome to Infinite Sports Lounge &amp; Resto Grill</h1>
-        <p style="text-align:center !important;">Food - Drinks - Entertainment</p>
+    <div class="hero-content">
+        <img src="infinite_resto_bar.png" alt="Infinite Resto Grill" class="hero-logo">
+        <p class="hero-tagline">Food &nbsp;·&nbsp; Drinks &nbsp;·&nbsp; Entertainment</p>
+        <a href="#bookingModal" class="hero-order-btn">Book a Reservation</a>
     </div>
 </section>
 
@@ -178,10 +183,51 @@
 
 <section id="contact" class="section-bg page-section">
     <hr>
-    <h2>Contact</h2>
-    <p><strong>Facebook Page:</strong></p>
-    <p><a href="https://www.facebook.com/profile.php?id=61583140017486" target="_blank">Infinite Sports Lounge &amp; Resto Grill</a></p>
-    <p class="text">Antipolo City - infiniteresto.grill@gmail.com</p>
+    <h2>Contact Us</h2>
+    <div class="contact-container">
+      <div class="contact-info-col">
+        <div class="contact-card">
+          <div class="contact-item">
+            <span class="contact-icon"></span>
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-value">Antipolo City, Rizal</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon"></span>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:infiniteresto.grill@gmail.com">infiniteresto.grill@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon"></span>
+            <div>
+              <div class="contact-label">Facebook</div>
+              <div class="contact-value"><a href="https://www.facebook.com/profile.php?id=61583140017486" target="_blank">Infinite Sports Lounge &amp; Resto Grill</a></div>
+            </div>
+          </div>
+        </div>
+        <a class="contact-directions-btn" href="https://maps.app.goo.gl/F7ucQFRPkKZLWGrT6" target="_blank">
+          Get Directions
+        </a>
+      </div>
+      <div class="contact-map-col">
+        <div class="contact-map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.30064935637898!2d121.17375!3d14.59248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b878e0c5e1c3%3A0x5b5e1d4e2d4c6a1b!2sInfinite%20Sports%20Lounge%20%26%20Resto%20Grill!5e0!3m2!1sen!2sph!4v1683000000000!5m2!1sen!2sph"
+            width="100%"
+            height="320"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Infinite Sports Lounge & Resto Grill Location">
+          </iframe>
+        </div>
+      </div>
+    </div>
 </section>
 
 <footer>
@@ -228,20 +274,20 @@
             <span class="reserve-rate">Php 200/hr</span>
           </span>
         </label>
+        <label class="reserve-option reserve-option-center">
+          <input type="checkbox" name="reserve" value="table">
+          <span class="reserve-card">
+            <span class="reserve-icon"></span>
+            <span class="reserve-label">Table</span>
+            <span class="reserve-rate">Walk-in</span>
+          </span>
+        </label>
         <label class="reserve-option">
           <input type="checkbox" name="reserve" value="videoke">
           <span class="reserve-card">
             <span class="reserve-icon"></span>
             <span class="reserve-label">Videoke</span>
             <span class="reserve-rate">Php 100/hr</span>
-          </span>
-        </label>
-        <label class="reserve-option">
-          <input type="checkbox" name="reserve" value="table">
-          <span class="reserve-card">
-            <span class="reserve-icon"></span>
-            <span class="reserve-label">Table</span>
-            <span class="reserve-rate">Walk-in</span>
           </span>
         </label>
       </div>
