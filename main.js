@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+// RESERVATION FORM (VALIDATION/ERRORS/INPUT FORMATS)
     const confirmBtn = document.getElementById("confirmReservationBtn");
     const nameInput = document.querySelector('#bookingModal input[type="text"]');
     const contactInput = document.querySelector('#bookingModal input[type="tel"]');
@@ -92,6 +93,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         this.value = formatted;
     });
+
+    // Gmail input format: only allows input before @gmail.com, auto-appends @gmail.com, 
+    // only alphanumeric characters, dots, and underscores allowed, max 30 chars before @
+    gmailInput.addEventListener("keydown", function (e) {
+
+    if (e.key === "@") {
+        e.preventDefault();
+
+        let value = this.value;
+        value = value.replace("@gmail.com", "");
+        this.value = value + "@gmail.com";
+        this.setSelectionRange(value.length, value.length);
+        }
+    });
+
+    gmailInput.addEventListener("input", function () {
+
+    let value = this.value;
+    value = value.replace(/\s/g, "").toLowerCase();
+    value = value.replace(/[^a-z0-9.@_]/g, "");
+
+    this.value = value;
+    });
+
+    // Gmail validation regex: alphanumeric characters before @gmail.com
+    const gmailRegex = /^[a-zA-Z][a-zA-Z0-9._]*@gmail\.com$/i;
 
     // Date input format: MM/DD/YYYY, only digits and slashes allowed, auto-formatting, future dates only
     const yearSelect = document.getElementById("year");
@@ -206,22 +233,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateHours();
 
-    // Gmail input: block numbers from being typed
-    gmailInput.addEventListener("input", function () {
-        const cursor = this.selectionStart;
-        const cleaned = this.value.replace(/[0-9]/g, "");
-        if (cleaned !== this.value) {
-            this.value = cleaned;
-            this.setSelectionRange(cursor - 1, cursor - 1);
-        }
-    });
     guestsInput.addEventListener("input", function () {
         this.value = this.value.replace(/[^0-9]/g, "");
         const value = parseInt(this.value || "0");
         if (value > 20) this.value = 20;
     });
 
-    // Checkboxes: select up to 3 options, visually indicate selection, deselect oldest if more than 3
+    // Checkboxes: select up to 2 options, visually indicate selection, deselect oldest if more than 2
     const reserveOptions = document.querySelectorAll(".reserve-option");
 
     clearCheckboxError();
@@ -258,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const name = nameInput.value.trim();
         const contact = contactInput.value.trim();
+        const gmail = gmailInput.value.trim();
         const guests = guestsInput.value;
         const cleanContact = contact.replace(/[^0-9]/g, "");
         const date = getSelectedDate();
@@ -282,25 +301,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Gmail check
-        const gmail = gmailInput.value.trim();
-        const gmailRegex = /^[a-zA-Z][a-zA-Z._]*@gmail\.com$/i;
         if (!gmail) {
             showFieldError(gmailInput, "Please fill in this required field.");
             isValid = false;
-        } else if (!gmailRegex.test(gmail)) {
-            showFieldError(gmailInput, "Please enter a valid Gmail address with letters only (e.g. yourname@gmail.com).");
+        } 
+        
+        else if (!gmailRegex.test(gmail)) {
+        showFieldError(gmailInput, "Please enter a valid Gmail address.");
+        isValid = false;
+        }
+
+        // Date check
+        if (!date) {
+            showFieldError(daySelect, "Please select a valid future date.");
             isValid = false;
         }
 
         // Guests number check
         if (!guests) {
             showFieldError(guestsInput, "Please fill in this required field.");
-            isValid = false;
-        }
-
-        // Date check
-        if (!date) {
-            showFieldError(daySelect, "Please select a valid future date.");
             isValid = false;
         }
 
@@ -332,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.hash = "bookingDone";
     });
 
-    //  Lightbox for images 
+// IMAGE LIGHTBOX (FOR BETTER VIEWING OF PHOTOS)
     const lightboxOverlay = document.getElementById("lightboxOverlay");
     const lightboxImg     = document.getElementById("lightboxImg");
     const lightboxClose   = document.getElementById("lightboxClose");
@@ -388,10 +407,10 @@ document.addEventListener("DOMContentLoaded", function () {
         else closeDrawer();
     });
 
-    // Close pag na-click ang overlay
+    // Closes if overlay is clicked
     drawerOverlay.addEventListener("click", closeDrawer);
 
-    // Close pag na-click ang kahit anong nav link
+    // Closes if any nav link is clicked
     navLinks.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", closeDrawer);
     });
