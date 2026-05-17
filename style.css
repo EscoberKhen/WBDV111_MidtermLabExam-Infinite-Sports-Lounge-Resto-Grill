@@ -13,6 +13,9 @@ body {
     background-color: #0a0a0a;
     overflow-x: hidden;
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 h2 {
   font-family: "Oswald", sans-serif;
@@ -277,8 +280,7 @@ p {
         radial-gradient(ellipse at 50% 40%, rgba(200,146,42,0.10) 0%, transparent 55%),
         radial-gradient(ellipse at 20% 70%, rgba(57,255,20,0.05) 0%, transparent 45%),
         radial-gradient(ellipse at 80% 70%, rgba(79,195,247,0.04) 0%, transparent 45%),
-        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(57,255,20,0.012) 60px, rgba(57,255,20,0.012) 61px),
-        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(57,255,20,0.012) 60px, rgba(57,255,20,0.012) 61px);
+;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -398,22 +400,63 @@ hr {
   }
 }
 
+.page-sections {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 .page-section {
   display: none;
   padding-top: 80px;
+  flex: 1;
 }
 .page-section.hero { padding-top: 65px; }
 .page-section:target {
   display: block;
-  animation: sectionFadeIn 0.45s ease forwards;
+  animation: sectionFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .page-section#home:target { display: flex; }
 .page-sections:not(:has(.page-section:target)) #home {
   display: flex;
-  animation: sectionFadeIn 0.45s ease forwards;
+  animation: sectionFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 @keyframes sectionFadeIn {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Staggered child animations on section entry */
+.page-section:target h2 {
+  animation: childSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+.page-section:target h3 {
+  animation: childSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+.page-section:target .about-text {
+  animation: childSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+}
+.page-section:target .about-images {
+  animation: childSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+.page-section:target .card:nth-child(1) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.12s both; }
+.page-section:target .card:nth-child(2) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.20s both; }
+.page-section:target .card:nth-child(3) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
+.page-section:target .card:nth-child(4) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.36s both; }
+.page-section:target .menu-category:nth-child(1) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.10s both; }
+.page-section:target .menu-category:nth-child(2) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.20s both; }
+.page-section:target .menu-category:nth-child(3) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.30s both; }
+.page-section:target .menu-category:nth-child(4) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.40s both; }
+.page-section:target .booze-tower-card:nth-child(1) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.12s both; }
+.page-section:target .booze-tower-card:nth-child(2) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.22s both; }
+.page-section:target .booze-tower-card:nth-child(3) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.32s both; }
+.page-section:target .flavor-table-wrap { animation: childSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.38s both; }
+.page-section:target .contact-card { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.16s both; }
+.page-section:target .contact-map-col { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
+.page-section:target .entertainment-cards { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.14s both; }
+.page-section:target .entertainment-gallery { animation: childSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
+
+@keyframes childSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .card {
@@ -448,6 +491,7 @@ hr {
     font-size: 13px;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 .card p {
     color: #39FF14;
@@ -460,7 +504,7 @@ hr {
 .card-info {
     background: rgba(0,0,0,0.72);
     padding: 10px 12px;
-    text-align: left;
+    text-align: center;
 }
 .card i { font-size: 35px; color: #39FF14; }
 @media (max-width: 600px) {
@@ -488,7 +532,7 @@ hr {
 }
 .about-text { flex: 1; }
 .about-text .text {
-    font-size: 17px;
+    font-size: 20px;
     line-height: 2;
     color: #dddddd;
     text-align: justify;
@@ -513,7 +557,7 @@ hr {
 }
 .image-item img {
     width: 100%;
-    height: 270px;
+    height: 340px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s ease, filter 0.4s ease;
@@ -575,10 +619,11 @@ hr {
 }
 .Booze-images {
     border: 1px solid #C8922A;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     text-align: center;
     box-shadow: 0 0 15px rgba(200,146,42,0.2);
+    padding: 24px;
 }
 .images-booze img {
     width: 100%;
@@ -675,7 +720,7 @@ hr {
 }
 .booze-tower-featured {
   border-color: #333;
-  background: #0a0800;
+  background: #0d0d0d;
   box-shadow: 0 0 20px rgba(200,146,42,0.2);
 }
 .booze-tower-best {
