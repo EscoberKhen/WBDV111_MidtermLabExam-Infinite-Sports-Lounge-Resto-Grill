@@ -425,7 +425,6 @@ hr {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Staggered child animations on section entry */
 .page-section:target h2 {
   animation: childSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
