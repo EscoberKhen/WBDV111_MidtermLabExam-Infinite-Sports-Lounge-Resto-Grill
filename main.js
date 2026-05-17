@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmBtn = document.getElementById("confirmReservationBtn");
     const nameInput = document.querySelector('#bookingModal input[type="text"]');
     const contactInput = document.querySelector('#bookingModal input[type="tel"]');
+    const gmailInput = document.getElementById("gmailInput");
     const guestsInput = document.querySelector('#bookingModal input[type="number"]');
     const checkboxes = document.querySelectorAll('#bookingModal input[type="checkbox"]');
 
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Clears all errors
-    [nameInput, contactInput, guestsInput].forEach(input => {
+    [nameInput, contactInput, gmailInput, guestsInput].forEach(input => {
         input.addEventListener("input", () => clearFieldError(input));
     });
 
@@ -205,7 +206,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateHours();
 
-    // Guests input format: only digits allowed, max 20 guests
+    // Gmail input: block numbers from being typed
+    gmailInput.addEventListener("input", function () {
+        const cursor = this.selectionStart;
+        const cleaned = this.value.replace(/[0-9]/g, "");
+        if (cleaned !== this.value) {
+            this.value = cleaned;
+            this.setSelectionRange(cursor - 1, cursor - 1);
+        }
+    });
     guestsInput.addEventListener("input", function () {
         this.value = this.value.replace(/[^0-9]/g, "");
         const value = parseInt(this.value || "0");
@@ -272,6 +281,17 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
+        // Gmail check
+        const gmail = gmailInput.value.trim();
+        const gmailRegex = /^[a-zA-Z][a-zA-Z._]*@gmail\.com$/i;
+        if (!gmail) {
+            showFieldError(gmailInput, "Please fill in this required field.");
+            isValid = false;
+        } else if (!gmailRegex.test(gmail)) {
+            showFieldError(gmailInput, "Please enter a valid Gmail address with letters only (e.g. yourname@gmail.com).");
+            isValid = false;
+        }
+
         // Guests number check
         if (!guests) {
             showFieldError(guestsInput, "Please fill in this required field.");
@@ -299,23 +319,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!isValid) return;
 
-        showMessage("Reservation successful! Redirecting...", "success");
-
         // Resets the form after successful submission
         nameInput.value = "";
         contactInput.value = "";
+        gmailInput.value = "";
         guestsInput.value = "";
         checkboxes.forEach(cb => cb.checked = false);
         reserveOptions.forEach(opt => opt.classList.remove("active"));
         monthSelect.value = currentMonth;
         updateDaysAndScroll();
 
-        setTimeout(() => {
-            document.getElementById("bookingDone").scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-                });
-        }, 800);
+        window.location.hash = "bookingDone";
     });
 
     //  Lightbox for images 
@@ -348,5 +362,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closeLightbox();
+    });
+
+    // Mobile navbar drawer 
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const drawerOverlay = document.getElementById("drawerOverlay");
+    const menuIcon = document.querySelector(".menu-icon");
+
+    function closeDrawer() {
+        menuToggle.checked = false;
+        drawerOverlay.style.display = "none";
+        navLinks.style.transform = "translateX(100%)";
+        menuIcon.style.color = "";
+    }
+
+    function openDrawer() {
+        drawerOverlay.style.display = "block";
+        navLinks.style.transform = "translateX(0)";
+        menuIcon.style.color = "#39FF14";
+    }
+
+    menuToggle.addEventListener("change", function () {
+        if (this.checked) openDrawer();
+        else closeDrawer();
+    });
+
+    // Close pag na-click ang overlay
+    drawerOverlay.addEventListener("click", closeDrawer);
+
+    // Close pag na-click ang kahit anong nav link
+    navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", closeDrawer);
     });
 });
