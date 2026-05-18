@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-// RESERVATION FORM (VALIDATION/ERRORS/INPUT FORMATS)
     const confirmBtn = document.getElementById("confirmReservationBtn");
     const nameInput = document.querySelector('#bookingModal input[type="text"]');
     const contactInput = document.querySelector('#bookingModal input[type="tel"]');
@@ -8,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const guestsInput = document.querySelector('#bookingModal input[type="number"]');
     const checkboxes = document.querySelectorAll('#bookingModal input[type="checkbox"]');
 
-    // Error messages for required fields and invalid formats
     function showFieldError(input, message) {
         let error = input.nextElementSibling;
 
@@ -56,12 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (error) error.remove();
     }
 
-    // Clears all errors
     [nameInput, contactInput, gmailInput, guestsInput].forEach(input => {
         input.addEventListener("input", () => clearFieldError(input));
     });
 
-    // Name input format: only letters, spaces, and periods, auto-capitalization, max 50 chars
     nameInput.addEventListener("input", function () {
         this.value = this.value.replace(/[^a-zA-Z.\s]/g, "");
         this.value = this.value.replace(/\s+/g, " ").trimStart();
@@ -76,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Contact input format: auto-format as 09XX-XXX-XXXX, only digits allowed, max 11 digits
     contactInput.addEventListener("input", function () {
         let numbers = this.value.replace(/[^0-9]/g, "");
 
@@ -94,8 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
         this.value = formatted;
     });
 
-    // Gmail input format: only allows input before @gmail.com, auto-appends @gmail.com, 
-    // only alphanumeric characters, dots, and underscores allowed, max 30 chars before @
     gmailInput.addEventListener("keydown", function (e) {
 
     if (e.key === "@") {
@@ -117,10 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
     this.value = value;
     });
 
-    // Gmail validation regex: alphanumeric characters before @gmail.com
     const gmailRegex = /^[a-zA-Z][a-zA-Z0-9._]*@gmail\.com$/i;
 
-    // Date input format: MM/DD/YYYY, only digits and slashes allowed, auto-formatting, future dates only
     const yearSelect = document.getElementById("year");
     const monthSelect = document.getElementById("month");
     const daySelect = document.getElementById("day");
@@ -191,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     }
 
-    //Time input format: only digits allowed, auto-format to 12-hour with AM/PM
     const hourSelect = document.getElementById("hour");
     const ampmSelect = document.getElementById("ampm");
 
@@ -239,7 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (value > 20) this.value = 20;
     });
 
-    // Checkboxes: select up to 2 options, visually indicate selection, deselect oldest if more than 2
     const reserveOptions = document.querySelectorAll(".reserve-option");
 
     clearCheckboxError();
@@ -270,7 +259,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Reservation confirmation and submission: validate all fields, show errors
     confirmBtn.addEventListener("click", function (event) {
         event.preventDefault();
 
@@ -283,13 +271,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let isValid = true;
 
-        // Name check
         if (!name) {
             showFieldError(nameInput, "Please fill in this required field.");
             isValid = false;
         }
 
-        // Contact check
         if (!contact) {
             showFieldError(contactInput, "Please fill in this required field.");
             isValid = false;
@@ -300,7 +286,6 @@ document.addEventListener("DOMContentLoaded", function () {
             isValid = false;
         }
 
-        // Gmail check
         if (!gmail) {
             showFieldError(gmailInput, "Please fill in this required field.");
             isValid = false;
@@ -311,19 +296,16 @@ document.addEventListener("DOMContentLoaded", function () {
         isValid = false;
         }
 
-        // Date check
         if (!date) {
             showFieldError(daySelect, "Please select a valid future date.");
             isValid = false;
         }
 
-        // Guests number check
         if (!guests) {
             showFieldError(guestsInput, "Please fill in this required field.");
             isValid = false;
         }
 
-        // Clears old checkbox error
         clearCheckboxError();
 
         let selected = [];
@@ -338,7 +320,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!isValid) return;
 
-        // Resets the form after successful submission
         nameInput.value = "";
         contactInput.value = "";
         gmailInput.value = "";
@@ -351,7 +332,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.hash = "bookingDone";
     });
 
-// IMAGE LIGHTBOX (FOR BETTER VIEWING OF PHOTOS)
     const lightboxOverlay = document.getElementById("lightboxOverlay");
     const lightboxImg     = document.getElementById("lightboxImg");
     const lightboxClose   = document.getElementById("lightboxClose");
@@ -383,7 +363,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.key === "Escape") closeLightbox();
     });
 
-    // Mobile navbar drawer 
     const menuToggle = document.getElementById("menu-toggle");
     const navLinks = document.querySelector(".nav-links");
     const drawerOverlay = document.getElementById("drawerOverlay");
@@ -407,10 +386,8 @@ document.addEventListener("DOMContentLoaded", function () {
         else closeDrawer();
     });
 
-    // Closes if overlay is clicked
     drawerOverlay.addEventListener("click", closeDrawer);
-
-    // Closes if any nav link is clicked
+    
     navLinks.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", closeDrawer);
     });
