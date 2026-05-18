@@ -61,9 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
         input.addEventListener("input", () => clearFieldError(input));
     });
 
-    // Name input format: only letters and spaces, auto-capitalization, max 50 chars
+    // Name input format: only letters, spaces, and periods, auto-capitalization, max 50 chars
     nameInput.addEventListener("input", function () {
-        this.value = this.value.replace(/[^a-zA-Z\s]/g, "");
+        this.value = this.value.replace(/[^a-zA-Z.\s]/g, "");
         this.value = this.value.replace(/\s+/g, " ").trimStart();
         this.value = this.value
             .toLowerCase()
