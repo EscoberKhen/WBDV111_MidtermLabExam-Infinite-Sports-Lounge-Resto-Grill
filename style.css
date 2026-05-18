@@ -61,8 +61,7 @@ p {
     top: 0;
     left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 16px rgba(57,255,20,0.2), 0 2px 8px rgba(0,0,0,0.8);
-    backdrop-filter: blur(2px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.9);
     border-bottom: 1px solid rgba(57,255,20,0.25);
     overflow: hidden;
 }
@@ -179,8 +178,7 @@ p {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.65);
     z-index: 998;
 }
 @media (min-width: 901px) {
@@ -221,7 +219,7 @@ p {
         width: min(280px, 80vw);
         background: #0a0a0a;
         border-left: 1px solid rgba(57, 255, 20, 0.25);
-        box-shadow: -6px 0 32px rgba(0, 0, 0, 0.7);
+        box-shadow: -6px 0 24px rgba(0, 0, 0, 0.8);
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -230,7 +228,8 @@ p {
         z-index: 999;
         list-style: none;
         transform: translateX(100%);
-        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
     }
 
     .nav-links li { width: 100%; }
@@ -314,18 +313,17 @@ p {
     position: relative;
     z-index: 1;
     filter:
-        drop-shadow(0 0 40px rgba(200,146,42,0.50))
-        drop-shadow(0 0 80px rgba(200,146,42,0.20))
-        drop-shadow(0 4px 20px rgba(0,0,0,0.8))
-        brightness(1.08);
-    animation: heroLogoPulse 4s ease-in-out infinite;
+        drop-shadow(0 0 30px rgba(200,146,42,0.40))
+        drop-shadow(0 4px 16px rgba(0,0,0,0.7));
+    animation: heroLogoPulse 5s ease-in-out infinite;
+    will-change: filter;
 }
 @keyframes heroLogoPulse {
     0%, 100% {
-        filter: drop-shadow(0 0 30px rgba(200,146,42,0.45)) drop-shadow(0 0 60px rgba(200,146,42,0.15)) drop-shadow(0 4px 20px rgba(0,0,0,0.8)) brightness(1.05);
+        filter: drop-shadow(0 0 28px rgba(200,146,42,0.38)) drop-shadow(0 4px 16px rgba(0,0,0,0.7));
     }
     50% {
-        filter: drop-shadow(0 0 50px rgba(200,146,42,0.70)) drop-shadow(0 0 90px rgba(57,255,20,0.20)) drop-shadow(0 4px 24px rgba(0,0,0,0.8)) brightness(1.12);
+        filter: drop-shadow(0 0 44px rgba(200,146,42,0.60)) drop-shadow(0 4px 20px rgba(0,0,0,0.7));
     }
 }
 .hero-tagline {
@@ -413,68 +411,74 @@ hr {
 .page-section.hero { padding-top: 65px; }
 .page-section:target {
   display: block;
-  animation: sectionFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: sectionFadeIn 0.35s ease-out forwards;
 }
 .page-section#home:target { display: flex; }
 .page-sections:not(:has(.page-section:target)) #home {
   display: flex;
-  animation: sectionFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: sectionFadeIn 0.35s ease-out forwards;
 }
 @keyframes sectionFadeIn {
-  from { opacity: 0; transform: translateY(32px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Staggered child animations on section entry */
 .page-section:target h2 {
-  animation: childSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+  animation: childSlideUp 0.35s ease-out 0.05s both;
 }
 .page-section:target h3 {
-  animation: childSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+  animation: childSlideUp 0.3s ease-out 0.10s both;
 }
 .page-section:target .about-text {
-  animation: childSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  animation: childSlideUp 0.35s ease-out 0.12s both;
 }
 .page-section:target .about-images {
-  animation: childSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+  animation: childSlideUp 0.35s ease-out 0.18s both;
 }
-.page-section:target .card:nth-child(1) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.12s both; }
-.page-section:target .card:nth-child(2) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.20s both; }
-.page-section:target .card:nth-child(3) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
-.page-section:target .card:nth-child(4) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.36s both; }
-.page-section:target .menu-category:nth-child(1) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.10s both; }
-.page-section:target .menu-category:nth-child(2) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.20s both; }
-.page-section:target .menu-category:nth-child(3) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.30s both; }
-.page-section:target .menu-category:nth-child(4) { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.40s both; }
-.page-section:target .booze-tower-card:nth-child(1) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.12s both; }
-.page-section:target .booze-tower-card:nth-child(2) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.22s both; }
-.page-section:target .booze-tower-card:nth-child(3) { animation: childSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.32s both; }
-.page-section:target .flavor-table-wrap { animation: childSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.38s both; }
-.page-section:target .contact-card { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.16s both; }
-.page-section:target .contact-map-col { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
-.page-section:target .entertainment-cards { animation: childSlideUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.14s both; }
-.page-section:target .entertainment-gallery { animation: childSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
+.page-section:target .card:nth-child(1) { animation: childSlideUp 0.3s ease-out 0.08s both; }
+.page-section:target .card:nth-child(2) { animation: childSlideUp 0.3s ease-out 0.14s both; }
+.page-section:target .card:nth-child(3) { animation: childSlideUp 0.3s ease-out 0.20s both; }
+.page-section:target .card:nth-child(4) { animation: childSlideUp 0.3s ease-out 0.26s both; }
+.page-section:target .menu-category:nth-child(1) { animation: childSlideUp 0.3s ease-out 0.08s both; }
+.page-section:target .menu-category:nth-child(2) { animation: childSlideUp 0.3s ease-out 0.16s both; }
+.page-section:target .menu-category:nth-child(3) { animation: childSlideUp 0.3s ease-out 0.24s both; }
+.page-section:target .menu-category:nth-child(4) { animation: childSlideUp 0.3s ease-out 0.30s both; }
+.page-section:target .booze-tower-card:nth-child(1) { animation: childSlideUp 0.3s ease-out 0.08s both; }
+.page-section:target .booze-tower-card:nth-child(2) { animation: childSlideUp 0.3s ease-out 0.16s both; }
+.page-section:target .booze-tower-card:nth-child(3) { animation: childSlideUp 0.3s ease-out 0.24s both; }
+.page-section:target .flavor-table-wrap { animation: childSlideUp 0.35s ease-out 0.28s both; }
+.page-section:target .contact-card { animation: childSlideUp 0.3s ease-out 0.10s both; }
+.page-section:target .contact-map-col { animation: childSlideUp 0.3s ease-out 0.20s both; }
+.page-section:target .entertainment-cards { animation: childSlideUp 0.3s ease-out 0.10s both; }
+.page-section:target .entertainment-gallery { animation: childSlideUp 0.35s ease-out 0.20s both; }
 
 @keyframes childSlideUp {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Disable heavy animations on low-end / prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 .card {
     background: #111;
     border: 1px solid rgba(57,255,20,0.25);
     border-radius: 10px;
     text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 0.6s ease forwards;
-    animation-timeline: view();
-    animation-range: entry 0% cover 30%;
     overflow: hidden;
     position: relative;
     padding: 0;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(57,255,20,0.15), 0 0 30px rgba(57,255,20,0.08);
+    transform: translateY(-4px) translateZ(0);
+    box-shadow: 0 8px 18px rgba(57,255,20,0.12);
     border-color: rgba(57,255,20,0.5);
 }
 .card img {
@@ -559,11 +563,13 @@ hr {
     height: 340px;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease, filter 0.4s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    will-change: transform;
+    transform: translateZ(0);
 }
 .image-item:hover img {
-    transform: scale(1.04);
-    filter: brightness(1.1);
+    transform: scale(1.03) translateZ(0);
+    filter: brightness(1.08);
 }
 @media (max-width: 768px) {
     .about-container { flex-direction: column; }
@@ -1105,14 +1111,6 @@ footer p { text-align: center; }
   background: #0d2200;
   box-shadow: 0 0 10px rgba(57,255,20,0.25);
 }
-.checkbox-error {
-  grid-column: 1 / -1;
-  white-space: nowrap;
-  display: block;
-  color: red;
-  font-size: 12px;
-  margin-top: 6px;
-}
 .reserve-icon { font-size: 26px; line-height: 1; }
 .reserve-label {
   font-family: "Oswald", sans-serif;
@@ -1186,11 +1184,13 @@ footer p { text-align: center; }
   border-radius: 10px;
   padding: 10px;
   text-align: center;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .menu-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(57,255,20,0.2);
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 4px 14px rgba(57,255,20,0.15);
   border-color: #39FF14;
 }
 .menu-item img {
